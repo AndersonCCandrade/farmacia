@@ -51,4 +51,12 @@ public class ProdutoService {
 
     }
 
+    public void excluirProduto (Integer id) {
+        var produto = listarProdutoPorID(id);
+
+        Connection conn = connection.recuperarConexao();
+        new ProdutoDAO(conn).excluir(produto.getId());
+
+    }
+
 }

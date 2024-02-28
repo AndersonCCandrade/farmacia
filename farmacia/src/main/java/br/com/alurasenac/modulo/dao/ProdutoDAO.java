@@ -130,4 +130,20 @@ public class ProdutoDAO {
 
         return produto;
     }
+
+    public void excluir(Integer id) {
+        String sql = "DELETE FROM produto WHERE idproduto = ?";
+
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1,id);
+            preparedStatement.execute();
+
+            preparedStatement.close();
+            conn.close();
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
