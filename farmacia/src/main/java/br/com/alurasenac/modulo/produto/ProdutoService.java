@@ -37,7 +37,7 @@ public class ProdutoService {
         new ProdutoDAO(conn).alterar(produto.getId(),valor);
     }
 
-    private Produto listarProdutoPorID(Integer id){
+    public Produto listarProdutoPorID(Integer id){
 
         Connection conn = connection.recuperarConexao();
         Produto produto = new ProdutoDAO(conn).listarPorID(id);
