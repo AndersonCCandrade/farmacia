@@ -32,12 +32,11 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "Produto{" +
-                "id=" + id +
-                ", preco=" + preco +
-                ", nome='" + nome + '\'' +
-                ", fabricante='" + fabricante + '\'' +
-                '}';
+        return "Produto : " +
+                "ID do Produto: " + id +
+                " Preço: R$ " + preco +
+                " Nome: " + nome +
+                " Fabricante: " + fabricante;
     }
 
     public Integer getId() {
