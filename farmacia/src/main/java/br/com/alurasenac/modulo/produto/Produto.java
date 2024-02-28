@@ -6,14 +6,14 @@ import java.util.Objects;
 public class Produto {
 
     private Integer id;
-    private BigDecimal preco;
     private String nome;
+    private BigDecimal preco;
     private String fabricante;
 
     public Produto(DadosDoProduto dadosDoProduto) {
         this.id = dadosDoProduto.id();
-        this.preco = dadosDoProduto.preco();
         this.nome = dadosDoProduto.nome();
+        this.preco = dadosDoProduto.preco();
         this.fabricante = dadosDoProduto.fabricante();
     }
 
