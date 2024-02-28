@@ -73,4 +73,61 @@ public class ProdutoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public void alterar(Integer id, BigDecimal valor){
+        String sql = "UPDATE produto SET preco = ? WHERE idproduto = ?";
+
+        try {
+            conn.setAutoCommit(false);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setBigDecimal(1, valor);
+            preparedStatement.setInt(2, id);
+            preparedStatement.execute();
+
+            conn.commit();
+            preparedStatement.close();
+            conn.close();
+
+        }catch (SQLException e){
+            try{
+                conn.rollback();
+            }catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Produto listarPorID (Integer id){
+        Produto produto = null;
+
+        String sql = "SELECT * FROM produto WHERE idproduto = ?";
+
+        try{
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Integer idproduto = resultSet.getInt(1);
+                String nome = resultSet.getString(2);
+                BigDecimal preco = resultSet.getBigDecimal(3);
+                String fabricante = resultSet.getString(4);
+
+                DadosDoProduto dadosDoProduto = new DadosDoProduto(idproduto, nome, preco, fabricante);
+
+                produto = new Produto(dadosDoProduto);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            conn.close();
+
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+        return produto;
+    }
 }
