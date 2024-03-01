@@ -1,6 +1,7 @@
 package br.com.alurasenac.modulo.dao;
 
 import br.com.alurasenac.modulo.produto.DadosDoProduto;
+import br.com.alurasenac.modulo.produto.DadosDoProdutoID;
 import br.com.alurasenac.modulo.produto.Produto;
 
 import java.math.BigDecimal;
@@ -34,9 +35,9 @@ public class ProdutoDAO {
                 BigDecimal preco = resultSet.getBigDecimal(3);
                 String fabricante = resultSet.getString(4);
 
-                DadosDoProduto dadosDoProduto = new DadosDoProduto(id, nome, preco, fabricante);
+                DadosDoProdutoID dadosDoProdutoID = new DadosDoProdutoID(id, nome, preco, fabricante);
 
-                produto.add(new Produto(dadosDoProduto));
+                produto.add(new Produto(dadosDoProdutoID));
             }
 
             resultSet.close();
@@ -53,17 +54,15 @@ public class ProdutoDAO {
     public void salvar (DadosDoProduto dadosDoProduto) {
 
         var produto = new Produto(dadosDoProduto);
-        String sql = "INSERT INTO produto (idproduto, nome, preco,fabricante) VALUES (?,?,?,?)";
-
+        String sql = "INSERT INTO produto (nome, preco,fabricante) VALUES (?,?,?)";
 
 
         try {
 
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1,produto.getId());
-            preparedStatement.setString(2,produto.getNome());
-            preparedStatement.setBigDecimal(3,produto.getPreco());
-            preparedStatement.setString(4, produto.getFabricante());
+            preparedStatement.setString(1,produto.getNome());
+            preparedStatement.setBigDecimal(2,produto.getPreco());
+            preparedStatement.setString(3, produto.getFabricante());
             preparedStatement.execute();
 
             preparedStatement.close();
@@ -115,9 +114,9 @@ public class ProdutoDAO {
                 BigDecimal preco = resultSet.getBigDecimal(3);
                 String fabricante = resultSet.getString(4);
 
-                DadosDoProduto dadosDoProduto = new DadosDoProduto(idproduto, nome, preco, fabricante);
+                DadosDoProdutoID dadosDoProdutoID = new DadosDoProdutoID(idproduto, nome, preco, fabricante);
 
-                produto = new Produto(dadosDoProduto);
+                produto = new Produto(dadosDoProdutoID);
             }
 
             resultSet.close();

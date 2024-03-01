@@ -11,11 +11,19 @@ public class Produto {
     private String fabricante;
 
     public Produto(DadosDoProduto dadosDoProduto) {
-        this.id = dadosDoProduto.id();
         this.nome = dadosDoProduto.nome();
         this.preco = dadosDoProduto.preco();
         this.fabricante = dadosDoProduto.fabricante();
     }
+
+    public Produto(DadosDoProdutoID dadosDoProdutoid) {
+        this.id = dadosDoProdutoid.id();
+        this.nome = dadosDoProdutoid.nome();
+        this.preco = dadosDoProdutoid.preco();
+        this.fabricante = dadosDoProdutoid.fabricante();
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

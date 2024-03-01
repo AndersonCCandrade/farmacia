@@ -23,10 +23,10 @@ public class ProdutoService {
         return new ProdutoDAO(conn).listar();
     }
 
-    public void cadastraProduto(DadosDoProduto dadosDoProduto) {
+    public void cadastraProduto(DadosDoProduto produto) {
 
         Connection conn = connection.recuperarConexao();
-        new ProdutoDAO(conn).salvar(dadosDoProduto);
+        new ProdutoDAO(conn).salvar(produto);
 
     }
 
